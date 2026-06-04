@@ -135,8 +135,15 @@ section{padding:56px 0}
 .tmt{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
 .tmt-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
   padding:16px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
-.tmt-vid{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#0b0b0e;line-height:0}
-.tmt-vid video{width:100%;display:block;aspect-ratio:9/16;object-fit:cover;background:#000;vertical-align:top}
+.tmt-vid{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;
+  border:1px solid var(--border);background:#0b0b0e;line-height:0}
+.tmt-poster{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;
+  background:none;cursor:pointer;z-index:2;display:block}
+.tmt-poster img{width:100%;height:100%;object-fit:cover;display:block}
+.tmt-poster:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.tmt-vid video{width:100%;height:100%;display:block;object-fit:cover;background:#000}
+.tmt-vid:not(.is-playing) video{display:none}
+.tmt-vid.is-playing .tmt-poster{display:none}
 .tmt-who{display:flex;flex-direction:column;gap:2px;padding:0 6px 6px}
 .tmt-who .nm{font-weight:600;font-size:14px}
 .tmt-who .ro{font-size:12.5px;color:var(--text-50);font-weight:300}
@@ -191,7 +198,7 @@ footer{border-top:1px solid var(--border);padding:40px 0 60px;margin-top:30px}
       <div class="hero-video">
         <span class="kicker">Watch this first</span>
         <div class="video">
-          <iframe src="https://player.vimeo.com/video/1198431513?h=8bb5b4f489&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;muted=1&amp;player_id=0&amp;app_id=58479"
+          <iframe src="https://player.vimeo.com/video/1198444232?h=1b4a400f21&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;muted=1&amp;player_id=0&amp;app_id=58479"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             title="Velocity welcome video"
@@ -217,7 +224,7 @@ footer{border-top:1px solid var(--border);padding:40px 0 60px;margin-top:30px}
         <div class="n">01 / The Workbook</div>
         <h3>The Velocity Workbook</h3>
         <p>The full digital version of the booklet on your seat. Your stoplight, your CARE framework, your 30-day plan. Save it, fill it in again, share it with your team.</p>
-        <a class="btn" href="assets/velocity-workbook.pdf" target="_blank" rel="noopener">
+        <a class="btn" href="https://salesgeniusportal.s3.ca-central-1.amazonaws.com/TeamUploads/upload-Velocity-Workbook-2.pdf" target="_blank" rel="noopener">
           Open the workbook
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -305,7 +312,10 @@ footer{border-top:1px solid var(--border);padding:40px 0 60px;margin-top:30px}
 
       <div class="tmt-card">
         <div class="tmt-vid">
-          <video controls playsinline preload="metadata" aria-label="Testimonial from Eric P">
+          <button type="button" class="tmt-poster" aria-label="Play testimonial from Eric P">
+            <img src="https://salesgeniusportal.s3.ca-central-1.amazonaws.com/TeamUploads/upload-eric-velocity.jpg" alt="Eric P — testimonial preview" width="720" height="1280">
+          </button>
+          <video controls playsinline preload="none" aria-label="Testimonial from Eric P">
             <source src="https://salesgeniusportal.s3.ca-central-1.amazonaws.com/TeamUploads/upload-Eric.mp4" type="video/mp4">
           </video>
         </div>
@@ -314,8 +324,10 @@ footer{border-top:1px solid var(--border);padding:40px 0 60px;margin-top:30px}
 
       <div class="tmt-card">
         <div class="tmt-vid">
-          <video controls playsinline preload="metadata"
-            aria-label="Testimonial from Rick R">
+          <button type="button" class="tmt-poster" aria-label="Play testimonial from Rick R">
+            <img src="https://salesgeniusportal.s3.ca-central-1.amazonaws.com/TeamUploads/upload-rick-velocity.png" alt="Rick R — testimonial preview" width="720" height="1280">
+          </button>
+          <video controls playsinline preload="none" aria-label="Testimonial from Rick R">
             <source src="https://salesgeniusportal.s3.ca-central-1.amazonaws.com/TeamUploads/upload-RickTestimoneal.mp4" type="video/mp4">
           </video>
         </div>
@@ -324,8 +336,10 @@ footer{border-top:1px solid var(--border);padding:40px 0 60px;margin-top:30px}
 
       <div class="tmt-card">
         <div class="tmt-vid">
-          <video controls playsinline preload="metadata"
-            aria-label="Testimonial from Kathleen M">
+          <button type="button" class="tmt-poster" aria-label="Play testimonial from Kathleen M">
+            <img src="https://salesgeniusportal.s3.ca-central-1.amazonaws.com/TeamUploads/upload-kathleen-velocity.jpg" alt="Kathleen M — testimonial preview" width="720" height="1280">
+          </button>
+          <video controls playsinline preload="none" aria-label="Testimonial from Kathleen M">
             <source src="https://salesgeniusportal.s3.ca-central-1.amazonaws.com/TeamUploads/upload-Kathleen_Miller_Social_proof.mp4" type="video/mp4">
           </video>
         </div>
@@ -374,5 +388,21 @@ footer{border-top:1px solid var(--border);padding:40px 0 60px;margin-top:30px}
 </footer>
 
 <script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+document.querySelectorAll('.tmt-vid').forEach(function (wrap) {
+  var poster = wrap.querySelector('.tmt-poster');
+  var video = wrap.querySelector('video');
+  poster.addEventListener('click', function () {
+    document.querySelectorAll('.tmt-vid.is-playing video').forEach(function (other) {
+      if (other !== video) {
+        other.pause();
+        other.closest('.tmt-vid').classList.remove('is-playing');
+      }
+    });
+    wrap.classList.add('is-playing');
+    video.play();
+  });
+});
+</script>
 </body>
 </html>
